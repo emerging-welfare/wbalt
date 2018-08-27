@@ -11,13 +11,13 @@ import itertools
 
 # Create your views here.
 
-@login_required(login_url='http://localhost:8000/accounts/login')
+@login_required(login_url='http://54.201.191.234:8000/accounts/login')
 def index(request):
     all_texts = TextFile.objects.all()
     context = {'all_texts': all_texts}
     return render(request, 'classify/index.html', context)
 
-@login_required(login_url='http://localhost:8000/accounts/login')
+@login_required(login_url='http://54.201.191.234:8000/accounts/login')
 def detail(request, text_id):
     username = request.user.username
     all_texts = TextFile.objects.get(pk=text_id)
@@ -36,7 +36,7 @@ def detail(request, text_id):
                'is_protest': is_protest}
     return render(request, 'classify/detail.html', context)
 
-@login_required(login_url='http://localhost:8000/accounts/login')
+@login_required(login_url='http://54.201.191.234:8000/accounts/login')
 def filtered(request):
     username = request.user.username
     # İşaretlenmemiş datalardan biri verilecek.
@@ -45,7 +45,7 @@ def filtered(request):
     context= {'all_new_texts': all_new_texts}
     return render(request, 'classify/filtered.html', context)
 
-@login_required(login_url='http://localhost:8000/accounts/login')
+@login_required(login_url='http://54.201.191.234:8000/accounts/login')
 def agreed(request):
     username = request.user.username
     all_new_texts = TextFile.objects.filter(info__contains={username: None})[0]
@@ -55,7 +55,7 @@ def agreed(request):
     #return render(request, 'classify/agreed.html', context)
     return redirect('filtered')
 
-@login_required(login_url='http://localhost:8000/accounts/login')
+@login_required(login_url='http://54.201.191.234:8000/accounts/login')
 def nonagreed(request):
     username = request.user.username
     all_new_texts = TextFile.objects.filter(info__contains={username: None})[0]
@@ -65,7 +65,7 @@ def nonagreed(request):
     #return render(request, 'classify/nonagreed.html', context)
     return redirect('filtered')
 
-@login_required(login_url='http://localhost:8000/accounts/login')
+@login_required(login_url='http://54.201.191.234:8000/accounts/login')
 def protest(request, text_id):
     username = request.user.username
     all_new_texts = TextFile.objects.get(pk=text_id)
@@ -75,7 +75,7 @@ def protest(request, text_id):
     #return render(request, 'classify/changeprotest.html', context)
     return redirect('tagged')
 
-@login_required(login_url='http://localhost:8000/accounts/login')
+@login_required(login_url='http://54.201.191.234:8000/accounts/login')
 def nonprotest(request, text_id):
     username = request.user.username
     all_new_texts = TextFile.objects.get(pk=text_id)
@@ -85,21 +85,21 @@ def nonprotest(request, text_id):
     #return render(request, 'classify/changenonprotest.html', context)
     return redirect('tagged')
 
-@login_required(login_url='http://localhost:8000/accounts/login')
+@login_required(login_url='http://54.201.191.234:8000/accounts/login')
 def tagged(request):
     username = request.user.username
     all_true_texts = TextFile.objects.filter(info__contains={username: True})
     context = {'all_true_texts': all_true_texts}
     return render(request, 'classify/tagged.html', context)
 
-@login_required(login_url='http://localhost:8000/accounts/login')
+@login_required(login_url='http://54.201.191.234:8000/accounts/login')
 def nplabel(request):
     username = request.user.username
     all_false_texts = TextFile.objects.filter(info__contains={username: False})
     context = {'all_false_texts': all_false_texts}
     return render(request, 'classify/nplabel.html', context)
 
-@login_required(login_url='http://localhost:8000/accounts/login')
+@login_required(login_url='http://54.201.191.234:8000/accounts/login')
 def conflict(request):
     username = request.user.username
     if username == 'cagri':

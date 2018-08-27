@@ -16,10 +16,13 @@
         <h3><a href = "{{url_link}}"> {{url_link}}</a> </h3>
         {% if is_protest %}
             <h1>PROTEST</h1>
-        {% else %}
-            <h1>NON-PROTEST</h1>
         {% endif %}
-
+	{% if is_protest == None %}
+            <h1></h1>
+        {% endif %}
+	{% if is_protest == False %}
+	    <h1>NON-PROTEST</h1>
+	{% endif %}
 
     <input type="submit" class="btn btn-success center-block" value="Protest" onclick="location.href = 'http://localhost:8000/classify/{{ all_texts.id }}/changeprotest'" name="protest-btn">
 
